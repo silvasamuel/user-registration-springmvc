@@ -1,0 +1,13 @@
+package com.samuelsilva.something.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class IndexController {
+	
+	@RequestMapping("/userregistration")
+	public String init() {
+		return "SomethingIndex";
+	}
+}
