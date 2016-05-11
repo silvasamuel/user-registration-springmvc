@@ -1,6 +1,5 @@
 *.classpath
 *.jar
-*.properties
 *.project
 something/.settings/.jsdtscope
 something/.settings/org.eclipse.core.resources.prefs
