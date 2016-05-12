@@ -3,6 +3,7 @@ package com.samuelsilva.something.enums;
 /**
  * @author samuel.silva
  */
+
 public enum UserStatusEnum {
 	MODERATOR("Moderator", true),
 	USER("User", false);
