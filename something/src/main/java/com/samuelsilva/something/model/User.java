@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.samuelsilva.something.enums.UserStatusEnum;
 
@@ -36,7 +37,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserStatusEnum status;
 	
-	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date registrationDate;
 	
 	// Gets and Sets

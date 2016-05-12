@@ -1,10 +1,19 @@
 package com.samuelsilva.something.controller;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.samuelsilva.something.enums.UserStatusEnum;
 import com.samuelsilva.something.model.User;
+import com.samuelsilva.something.repository.Users;
 
 /**
  * @author samuel.silva
@@ -14,19 +23,30 @@ import com.samuelsilva.something.model.User;
 @RequestMapping("/userregistration")
 public class IndexController {
 	
+	@Autowired
+	private Users users;
+	
 	@RequestMapping("/new")
-	public String init() {
-		return "SomethingIndex";
+	public ModelAndView init() {
+		ModelAndView mv = new ModelAndView("SomethingIndex");
+		
+		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(User user) {
-		System.out.println(user.getName());
-		System.out.println(user.getEmail());
-		System.out.println(user.getStatus());
-		System.out.println(user.getId());
-		System.out.println(user.getRegistrationDate());
+	public ModelAndView save(User user) {
+		user.setRegistrationDate(new Date());
 		
-		return "SomethingIndex";
+		users.save(user);
+		
+		ModelAndView mv = new ModelAndView("SomethingIndex");
+		mv.addObject("message", "User successfully saved!");
+		
+		return mv;
+	}
+	
+	@ModelAttribute("userStatusList")
+	public List<UserStatusEnum> getUserStatusEnumList() {
+		return Arrays.asList(UserStatusEnum.values());
 	}
 }
