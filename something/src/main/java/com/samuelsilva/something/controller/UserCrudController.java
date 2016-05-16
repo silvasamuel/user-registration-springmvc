@@ -21,16 +21,23 @@ import com.samuelsilva.something.repository.Users;
 
 @Controller
 @RequestMapping("/userregistration")
-public class IndexController {
+public class UserCrudController {
 	
 	@Autowired
 	private Users users;
 	
-	@RequestMapping("/new")
+	@RequestMapping("/usercrud")
 	public ModelAndView init() {
-		ModelAndView mv = new ModelAndView("SomethingIndex");
+		ModelAndView mv = new ModelAndView("UserCrud");
 		
 		return mv;
+	}
+	
+	@RequestMapping
+	public ModelAndView searchUser() {
+		ModelAndView mv = new ModelAndView("UserSearch");
+		
+		return mv; 
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -39,7 +46,7 @@ public class IndexController {
 		
 		users.save(user);
 		
-		ModelAndView mv = new ModelAndView("SomethingIndex");
+		ModelAndView mv = new ModelAndView("UserCrud");
 		mv.addObject("message", "User successfully saved!");
 		
 		return mv;

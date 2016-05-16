@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="MasterLayout">
 <head>
-<meta charset="UTF-8"/>
 <title>User Registration</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/css/custom.css"/>
-<link rel="shortcut icon" href="/images/userImage.png"/>
 </head>
-<body>
 
-	<nav class="navbar navbar-inverse navbar-static-top">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      	<label class="nav-title">User Registration</label>
-	        <img alt="UserImage" src="/images/userImage.png" class="nav-img"/>
-	    </div>
-	  </div>
-	</nav>
+<section layout:fragment="content">	
 	
 	<form class="form-horizontal" method="POST" action="/userregistration">
 		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<span th:text="${message}"></span>
 		</div>
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-titel">New User</div>
+				<div class="clearfix">
+					<div class="panel-titel pull-left align-header">New User</div>
+					<a role="button" href="/userregistration/" 
+						class="btn btn-danger pull-right">Cancel</a>
+				</div>
 			</div>
 			
 			<div class="panel-body">
@@ -70,7 +65,6 @@
 			</div>
 		</div>
 	</form>
-	
-	<script src="/js/bootstrap.min.js"></script>
-</body>
+
+</section>
 </html>
