@@ -32,8 +32,20 @@
 				</thead>
 				
 				<tbody>
+					<tr th:each="user : ${userList}">
+						<td class="text-center" th:text="${user.id}"></td>
+						<td class="text-center" th:text="${user.name}"></td>
+						<td class="text-center" th:text="|${user.age} Years|"></td>
+						<td class="text-center" th:text="${user.email}"></td>
+						<td class="text-center">
+							<span class="label" th:text="${user.status.description}"
+							th:classappend="${user.status.getStatus() ? 'label-danger' : 'label-info'}"></span>
+						</td>
+						<td class="text-center"></td>
+					</tr>
+					
 					<tr>
-						<td colspan="6">No results were found!</td>
+						<td class="text-center" colspan="6" th:if="${#lists.isEmpty(userList)}">No results were found!</td>
 					</tr>
 				</tbody>
 			</table>

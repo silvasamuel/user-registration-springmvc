@@ -35,7 +35,10 @@ public class UserCrudController {
 	
 	@RequestMapping
 	public ModelAndView searchUser() {
+		List<User> allUsers = users.findAll();
+		
 		ModelAndView mv = new ModelAndView("UserSearch");
+		mv.addObject("userList", allUsers);
 		
 		return mv; 
 	}
