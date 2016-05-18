@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.samuelsilva.something.enums.UserStatusEnum;
@@ -27,12 +29,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message = "Please inform the user name!")
 	private String name;
 	
 	@Email
+	@NotEmpty(message = "Please inform the user email!")
 	private String email;
 	
-	private int age;
+	@NotNull(message = "Please inform the user age!")
+	private Integer age;
 	
 	@Enumerated(EnumType.STRING)
 	private UserStatusEnum status;
@@ -59,11 +64,11 @@ public class User {
 		this.name = name;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	
@@ -95,7 +100,9 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + age;
+		
+		result = id != null ? prime * result + id.intValue() :  prime * result + 0;
+		
 		return result;
 	}
 
