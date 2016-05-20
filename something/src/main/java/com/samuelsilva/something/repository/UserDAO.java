@@ -8,6 +8,6 @@ import com.samuelsilva.something.model.User;
  * @author samuel.silva
  */
 
-public interface Users extends JpaRepository<User, Long> {
+public interface UserDAO extends JpaRepository<User, Long> {
 
 }

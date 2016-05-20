@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.samuelsilva.something.enums.UserStatusEnum;
 import com.samuelsilva.something.model.User;
-import com.samuelsilva.something.repository.Users;
+import com.samuelsilva.something.repository.UserDAO;
 
 /**
  * @author samuel.silva
@@ -26,12 +27,15 @@ import com.samuelsilva.something.repository.Users;
 @RequestMapping("/userregistration")
 public class UserCrudController {
 	
+	private static final String USER_CRUD = "UserCrud";
+	private static final String USER_SEARCH = "UserSearch";
+	
 	@Autowired
-	private Users users;
+	private UserDAO userDAO;
 	
 	@RequestMapping("/usercrud")
 	public ModelAndView init() {
-		ModelAndView mv = new ModelAndView("UserCrud");
+		ModelAndView mv = new ModelAndView(USER_CRUD);
 		mv.addObject(new User());
 		
 		return mv;
@@ -39,12 +43,20 @@ public class UserCrudController {
 	
 	@RequestMapping
 	public ModelAndView searchUser() {
-		List<User> allUsers = users.findAll();
+		List<User> allUsers = userDAO.findAll();
 		
-		ModelAndView mv = new ModelAndView("UserSearch");
+		ModelAndView mv = new ModelAndView(USER_SEARCH);
 		mv.addObject("userList", allUsers);
 		
 		return mv; 
+	}
+	
+	@RequestMapping("{id}")
+	public ModelAndView update(@PathVariable("id") User user) {
+		ModelAndView mv = new ModelAndView(USER_CRUD);
+		mv.addObject(user);
+		
+		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -52,10 +64,10 @@ public class UserCrudController {
 		user.setRegistrationDate(new Date());
 		
 		if(errors.hasErrors()) {
-			return "UserCrud";
+			return USER_CRUD;
 		}
 		
-		users.save(user);
+		userDAO.save(user);
 		redirectAttributes.addFlashAttribute("message", "User successfully saved!");
 		
 		return "redirect:/userregistration/usercrud";

@@ -23,10 +23,10 @@
 				<thead>
 					<tr>
 						<th class="text-center col-md-1">#</th>
-						<th class="text-center col-md-2">Name</th>
+						<th class="text-center col-md-3">Name</th>
 						<th class="text-center col-md-1">Age</th>
-						<th class="text-center col-md-2">Email</th>
-						<th class="text-center col-md-2">Status</th>
+						<th class="text-center col-md-3">Email</th>
+						<th class="text-center col-md-1">Status</th>
 						<th class="text-center col-md-1">Actions</th>
 					</tr>
 				</thead>
@@ -41,7 +41,15 @@
 							<span class="label" th:text="${user.status.description}"
 							th:classappend="${user.status.getStatus() ? 'label-danger' : 'label-info'}"></span>
 						</td>
-						<td class="text-center"></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" th:href="@{/userregistration/{id}(id=${user.id})}">
+								<i class="fa fa-pencil" aria-hidden="true"></i>
+							</a>
+							
+							<a class="btn btn-link btn-xs">
+								<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</a>
+						</td>
 					</tr>
 					
 					<tr>
