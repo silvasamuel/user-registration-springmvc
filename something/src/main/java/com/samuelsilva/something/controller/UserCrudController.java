@@ -73,6 +73,14 @@ public class UserCrudController {
 		return "redirect:/userregistration/usercrud";
 	}
 	
+	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+		userDAO.delete(id);
+		
+		redirectAttributes.addFlashAttribute("message", "User successfully deleted!");
+		return "redirect:/userregistration";
+	}
+	
 	@ModelAttribute("userStatusList")
 	public List<UserStatusEnum> getUserStatusEnumList() {
 		return Arrays.asList(UserStatusEnum.values());

@@ -10,17 +10,8 @@
 <section layout:fragment="content">	
 	
 	<form class="form-horizontal" method="POST" action="/userregistration" th:object="${user}">
-		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<span th:text="${message}"></span>
-		</div>
-		
-		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<div th:each="detailedError : ${#fields.detailedErrors()}">
-				<span th:text="${detailedError.message}"></span>
-			</div>
-		</div>
+		<div layout:include="GeneralMessage"></div>
+		<div layout:include="ErrorMessage"></div>
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">
