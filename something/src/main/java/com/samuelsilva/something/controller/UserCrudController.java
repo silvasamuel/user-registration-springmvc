@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.samuelsilva.something.enums.UserStatusEnum;
 import com.samuelsilva.something.model.User;
 import com.samuelsilva.something.repository.UserDAO;
+import com.samuelsilva.something.service.UserService;
 
 /**
  * @author samuel.silva
@@ -27,11 +28,15 @@ import com.samuelsilva.something.repository.UserDAO;
 @RequestMapping("/userregistration")
 public class UserCrudController {
 	
+	// Redirect attributes
 	private static final String USER_CRUD = "UserCrud";
 	private static final String USER_SEARCH = "UserSearch";
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/usercrud")
 	public ModelAndView init() {
@@ -67,7 +72,7 @@ public class UserCrudController {
 			return USER_CRUD;
 		}
 		
-		userDAO.save(user);
+		userService.save(user);
 		redirectAttributes.addFlashAttribute("message", "User successfully saved!");
 		
 		return "redirect:/userregistration/usercrud";
@@ -75,7 +80,7 @@ public class UserCrudController {
 	
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-		userDAO.delete(id);
+		userService.delete(id);
 		
 		redirectAttributes.addFlashAttribute("message", "User successfully deleted!");
 		return "redirect:/userregistration";

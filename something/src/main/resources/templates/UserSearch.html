@@ -40,7 +40,7 @@
 						<td class="text-center" th:text="${user.email}"></td>
 						<td class="text-center">
 							<span class="label" th:text="${user.status.description}"
-							th:classappend="${user.status.getStatus() ? 'label-danger' : 'label-info'}"></span>
+							th:classappend="${user.status.getStatus() ? 'label-info' : 'label-danger'}"></span>
 						</td>
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" th:href="@{/userregistration/{id}(id=${user.id})}">
@@ -50,6 +50,10 @@
 							<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#deleteConfirmationModal" 
 								th:attr="data-id=${user.id}, data-name=${user.name}">
 								<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</a>
+							
+							<a class="btn btn-link btn-xs">
+								<i th:classappend="${user.status.getStatus() ? 'fa fa-lock' : 'fa fa-unlock'}" aria-hidden="true"></i>
 							</a>
 						</td>
 					</tr>

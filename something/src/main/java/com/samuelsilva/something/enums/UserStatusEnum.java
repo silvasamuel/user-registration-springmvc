@@ -5,8 +5,8 @@ package com.samuelsilva.something.enums;
  */
 
 public enum UserStatusEnum {
-	MODERATOR("Moderator", true),
-	USER("User", false);
+	ACTIVE("Active", true),
+	INACTIVE("Inactive", false);
 	
 	private String description;
 	private Boolean status;
