@@ -38,7 +38,7 @@
 						<td class="text-center" th:text="${user.name}"></td>
 						<td class="text-center" th:text="|${user.age} Years|"></td>
 						<td class="text-center" th:text="${user.email}"></td>
-						<td class="text-center">
+						<td class="text-center" th:attr="data-role=${user.id}">
 							<span class="label" th:text="${user.status.description}"
 							th:classappend="${user.status.getStatus() ? 'label-info' : 'label-danger'}"></span>
 						</td>
@@ -52,8 +52,9 @@
 								<i class="fa fa-trash-o" aria-hidden="true"></i>
 							</a>
 							
-							<a class="btn btn-link btn-xs">
-								<i th:classappend="${user.status.getStatus() ? 'fa fa-lock' : 'fa fa-unlock'}" aria-hidden="true"></i>
+							<a class="btn btn-link btn-xs js-status-update" th:href="@{/userregistration/{id}/changeStatus(id=${user.id})}"
+								th:attr="data-status-id=${user.id}">
+								<i th:classappend="${user.status.getStatus() ? 'fa fa-unlock' : 'fa fa-lock'}" aria-hidden="true"></i>
 							</a>
 						</td>
 					</tr>
