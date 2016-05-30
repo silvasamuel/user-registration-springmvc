@@ -9,7 +9,7 @@
 
 <section layout:fragment="content">	
 	
-	<form class="form-horizontal" method="POST" action="/userregistration" th:object="${user}">
+	<form class="form-horizontal" method="POST" th:action="@{/userregistration}" th:object="${user}">
 		<div layout:include="GeneralMessage"></div>
 		<div layout:include="ErrorMessage"></div>
 		
@@ -17,7 +17,7 @@
 			<div class="panel-heading">
 				<div class="clearfix">
 					<div class="panel-titel pull-left align-header">New User</div>
-					<a role="button" href="/userregistration/" 
+					<a role="button" th:href="@{/userregistration/}" 
 						class="btn btn-danger pull-right">Back</a>
 				</div>
 			</div>

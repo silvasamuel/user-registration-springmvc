@@ -14,13 +14,13 @@
 		<div class="panel-heading">
 			<div class="clearfix">
 				<div class="panel-titel pull-left align-header">User Search</div>
-				<a role="button" href="/userregistration/usercrud" 
+				<a role="button" th:href="@{/userregistration/usercrud}" 
 					class="btn btn-primary pull-right">New User</a>
 			</div>
 		</div>
 		
 		<div class="panel-body">
-			<form method="GET" class="form-horizontal" action="/userregistration" th:object="${filter}">
+			<form method="GET" class="form-horizontal" th:action="@{/userregistration}" th:object="${filter}">
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
