@@ -1,3 +1,16 @@
+/*Just on big screens*/
+@media(min-width: 768px) {
+	.panel-default {
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+	
+	.alert {
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+}
+
 .nav-img {
 	width:55px;
 	margin-top:-5px;
@@ -8,16 +21,6 @@
 	color: #fff;
 	font-size: 20px;
 	margin-top: 10px;
-}
-
-.panel-default {
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-.alert {
-	margin-right: 10px;
-	margin-left: 10px;
 }
 
 .align-header {

@@ -35,50 +35,52 @@
 				</div>
 			</form>
 			
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th class="text-center col-md-1">#</th>
-						<th class="text-center col-md-3">Name</th>
-						<th class="text-center col-md-1">Age</th>
-						<th class="text-center col-md-3">Email</th>
-						<th class="text-center col-md-1">Status</th>
-						<th class="text-center col-md-1">Actions</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr th:each="user : ${userList}">
-						<td class="text-center" th:text="${user.id}"></td>
-						<td class="text-center" th:text="${user.name}"></td>
-						<td class="text-center" th:text="|${user.age} Years|"></td>
-						<td class="text-center" th:text="${user.email}"></td>
-						<td class="text-center" th:attr="data-role=${user.id}">
-							<span class="label" th:text="${user.status.description}"
-							th:classappend="${user.status.getStatus() ? 'label-info' : 'label-danger'}"></span>
-						</td>
-						<td class="text-center">
-							<a class="btn btn-link btn-xs" th:href="@{/userregistration/{id}(id=${user.id})}">
-								<i class="fa fa-pencil" aria-hidden="true"></i>
-							</a>
-							
-							<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#deleteConfirmationModal" 
-								th:attr="data-id=${user.id}, data-name=${user.name}">
-								<i class="fa fa-trash-o" aria-hidden="true"></i>
-							</a>
-							
-							<a class="btn btn-link btn-xs js-status-update" th:href="@{/userregistration/{id}/changeStatus(id=${user.id})}"
-								th:attr="data-status-id=${user.id}">
-								<i th:classappend="${user.status.getStatus() ? 'fa fa-unlock' : 'fa fa-lock'}" aria-hidden="true"></i>
-							</a>
-						</td>
-					</tr>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th class="text-center col-md-3">Name</th>
+							<th class="text-center col-md-1">Age</th>
+							<th class="text-center col-md-3">Email</th>
+							<th class="text-center col-md-1">Status</th>
+							<th class="text-center col-md-1">Actions</th>
+						</tr>
+					</thead>
 					
-					<tr>
-						<td class="text-center" colspan="6" th:if="${#lists.isEmpty(userList)}">No results were found!</td>
-					</tr>
-				</tbody>
-			</table>
+					<tbody>
+						<tr th:each="user : ${userList}">
+							<td class="text-center" th:text="${user.id}"></td>
+							<td class="text-center" th:text="${user.name}"></td>
+							<td class="text-center" th:text="|${user.age} Years|"></td>
+							<td class="text-center" th:text="${user.email}"></td>
+							<td class="text-center" th:attr="data-role=${user.id}">
+								<span class="label" th:text="${user.status.description}"
+								th:classappend="${user.status.getStatus() ? 'label-info' : 'label-danger'}"></span>
+							</td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" th:href="@{/userregistration/{id}(id=${user.id})}">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</a>
+								
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#deleteConfirmationModal" 
+									th:attr="data-id=${user.id}, data-name=${user.name}">
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
+								</a>
+								
+								<a class="btn btn-link btn-xs js-status-update" th:href="@{/userregistration/{id}/changeStatus(id=${user.id})}"
+									th:attr="data-status-id=${user.id}">
+									<i th:classappend="${user.status.getStatus() ? 'fa fa-unlock' : 'fa fa-lock'}" aria-hidden="true"></i>
+								</a>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="text-center" colspan="6" th:if="${#lists.isEmpty(userList)}">No results were found!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		
 		<div layout:include="DeleteConfirmationDialog"></div>
