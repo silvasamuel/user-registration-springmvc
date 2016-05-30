@@ -1,7 +1,6 @@
 package com.samuelsilva.something.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.samuelsilva.something.enums.UserStatusEnum;
 import com.samuelsilva.something.model.User;
-import com.samuelsilva.something.repository.UserDAO;
+import com.samuelsilva.something.repository.filter.UserFilter;
 import com.samuelsilva.something.service.UserService;
 
 /**
@@ -34,9 +33,6 @@ public class UserController {
 	private static final String USER_SEARCH = "UserSearch";
 	
 	@Autowired
-	private UserDAO userDAO;
-	
-	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/usercrud")
@@ -48,11 +44,11 @@ public class UserController {
 	}
 	
 	@RequestMapping
-	public ModelAndView searchUser() {
-		List<User> allUsers = userDAO.findAll();
+	public ModelAndView searchUser(@ModelAttribute("filter") UserFilter filter) {
+		List<User> responseList = userService.search(filter);
 		
 		ModelAndView mv = new ModelAndView(USER_SEARCH);
-		mv.addObject("userList", allUsers);
+		mv.addObject("userList", responseList);
 		
 		return mv; 
 	}
@@ -67,8 +63,6 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Validated User user, Errors errors, RedirectAttributes redirectAttributes) {
-		user.setRegistrationDate(new Date());
-		
 		if(errors.hasErrors()) {
 			return USER_CRUD;
 		}
