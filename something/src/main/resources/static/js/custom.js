@@ -14,8 +14,8 @@ $('#deleteConfirmationModal').on('show.bs.modal', function(event) {
 	form.attr('action', action + userID);
 	
 	// Set the dialog message
-	var userName = button.data('name');
-	modal.find('.modal-body span').html('Do you really want to delete the user ' + userName + ' ?');
+	//var userName = button.data('name');
+	//modal.find('.modal-body span').html('Do you really want to delete the user ' + userName + ' ?');
 });
 
 // When page is load
