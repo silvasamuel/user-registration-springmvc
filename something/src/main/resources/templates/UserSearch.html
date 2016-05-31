@@ -4,7 +4,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorator="MasterLayout">
 <head>
-	<title>User Search</title>
+	<title th:text="#{searchUsers}"></title>
 </head>
 	
 <section layout:fragment="content">
@@ -13,9 +13,9 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
-				<div class="panel-titel pull-left align-header">User Search</div>
+				<div class="panel-titel pull-left align-header" th:text="#{searchUsers}"></div>
 				<a role="button" th:href="@{/userregistration/usercrud}" 
-					class="btn btn-primary pull-right">New User</a>
+					class="btn btn-primary pull-right" th:text="#{newUser}"></a>
 			</div>
 		</div>
 		
@@ -40,11 +40,11 @@
 					<thead>
 						<tr>
 							<th class="text-center col-md-1">#</th>
-							<th class="text-center col-md-3">Name</th>
-							<th class="text-center col-md-1">Age</th>
-							<th class="text-center col-md-3">Email</th>
-							<th class="text-center col-md-1">Status</th>
-							<th class="text-center col-md-1">Actions</th>
+							<th class="text-center col-md-3" th:text="#{name}"></th>
+							<th class="text-center col-md-1" th:text="#{age}"></th>
+							<th class="text-center col-md-3" th:text="#{email}"></th>
+							<th class="text-center col-md-1" th:text="#{status}"></th>
+							<th class="text-center col-md-1" th:text="#{actions}"></th>
 						</tr>
 					</thead>
 					
@@ -52,7 +52,7 @@
 						<tr th:each="user : ${userList}">
 							<td class="text-center" th:text="${user.id}"></td>
 							<td class="text-center" th:text="${user.name}"></td>
-							<td class="text-center" th:text="|${user.age} Years|"></td>
+							<td class="text-center" th:text="|${user.age} #{years}|"></td>
 							<td class="text-center" th:text="${user.email}"></td>
 							<td class="text-center" th:attr="data-role=${user.id}">
 								<span class="label" th:text="${user.status.description}"
@@ -76,7 +76,7 @@
 						</tr>
 						
 						<tr>
-							<td class="text-center" colspan="6" th:if="${#lists.isEmpty(userList)}">No results were found!</td>
+							<td class="text-center" colspan="6" th:if="${#lists.isEmpty(userList)}" th:text="#{response.noResults}"></td>
 						</tr>
 					</tbody>
 				</table>
